@@ -4,35 +4,31 @@ import time
 milisecond = 0
 second = 0
 minute = 0
-placesecond = "0"
-# placeholder = "0" + str(minute) + ":" + "0" +str(second) + ":" + "0" + placemili
+placesecond = ""
+intrval = 0.1
 
-
-
-# placeholder = "00:00:00"
-# placeholder = str(minute)+ ":" + str(second) + ":" + str(milisecond)
 
 
 def startwatch():
     
-    global milisecond, second, minute,placesecond
+    global milisecond, second, minute, placesecond
+    # interface = f"{minute}:{second}:{milisecond}"
     milisecond = milisecond + 1
     if (milisecond <= 9):
-        placemili = str(milisecond)
-        print("00:0"+placesecond+":0"+placemili)
+        print(f"0{minute}:0{second}:0{milisecond}")
     if (milisecond > 9):
-        placemili = str(milisecond)
-        print("00:0"+placesecond+":"+placemili)
-    if (milisecond > 99):
+        print(f"0{minute}:0{second}:{milisecond}")
+    if (milisecond > 15):
         milisecond  = 0
         second = second + 1
-        placesecond = str(second)
-        placemili = str(milisecond)
-        print("00:0"+placesecond+":0"+placemili)
-    
+        print(f"0{minute}:0{second}:00")
+        if (second > 9):
+            print(f"0{minute}:{second}:0{milisecond}")
+            # if( second > 9):
+            #     print(f"0{minute}:{second}:0{milisecond}")
 
-    
+
 starttime = time.time()
 while True:
     startwatch()
-    time.sleep(0.01 - ((time.time() - starttime) % 0.01))
+    time.sleep(intrval - ((time.time() - starttime) % intrval))
